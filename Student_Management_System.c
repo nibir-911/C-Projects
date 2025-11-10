@@ -183,7 +183,19 @@ void searchbyname()
     }
 }
 
-void searchbyroll() { printf("Search by roll coming soon...\n"); }
-void searchbydepartment() { printf("Search by department coming soon...\n"); }
-void updatestudent() { printf("Update student coming soon...\n"); }
-void deletestudent() { printf("Delete student coming soon...\n"); }
+void searchbyroll() 
+{
+     printf(); 
+}
+void searchbydepartment() 
+{ 
+    printf(); 
+}
+void updatestudent() 
+{ 
+    printf(); 
+}
+void deletestudent() 
+{ 
+    printf(); 
+}
