@@ -164,7 +164,7 @@ void searchbyname()
     scanf(" %[^\n]", search); 
     
     for (int i = 0; i < count; i++) 
-    {
+      {
        if (strcmp(student[i].name, search) == 0) 
         {
             printf("\nStudent Found!\n");
@@ -174,7 +174,7 @@ void searchbyname()
             printf("CGPA: %.2f\n", student[i].cgpa);
             found = 1;
             break;
-        }
+    }
     }
 
     if(!found) 
@@ -184,22 +184,73 @@ void searchbyname()
 }
 
 void searchbyroll() 
-{
-     printf(); 
-}
+{ 
+    if (count==0)
+        {
+           printf("No records found.\n");
+        }
+        printf("Enter Roll: ");
+        int search;
+        scanf("%d", &search);
+         int i;
+       for ( i = 0; i < count; i++)
+       {
+           if (student[i].roll==search)
+           {
+            printf("\nStudent Found!\n");
+            printf("Name: %s\n", student[i].name);
+            printf("Roll: %d\n", student[i].roll);
+            printf("Department: %s\n", student[i].department);
+            printf("CGPA: %.2f\n", student[i].cgpa);
+            
+            break;
+           }
+           
+       }
+       if (student[i].roll!=search)
+       {
+           printf("Student Not Found!\n");
+       }
+        
+    }
+
 void searchbydepartment() 
 { 
-    printf(); 
+   if (count == 0) {
+        printf("No records found.\n");
+        return;
+    }
+
+    char search[100];
+    int found = 0;
+
+    printf("Enter Department Name: ");
+    scanf(" %[^\n]", search); 
+    
+    for (int i = 0; i < count; i++) 
+    {
+    if (strcmp(student[i].department, search) == 0) 
+    {
+            printf("\nStudent Found!\n");
+            printf("Name: %s\n", student[i].name);
+            printf("Roll: %d\n", student[i].roll);
+            printf("Department: %s\n", student[i].department);
+            printf("CGPA: %.2f\n", student[i].cgpa);
+            found = 1;
+            break;
+    }
 }
+    if(!found) 
+    {
+        printf("Student Not Found!\n");
+    }
+}
+
 void updatestudent() 
 { 
-    printf(); 
+    
 }
 void deletestudent() 
-{ 
-    printf(); 
+{
+   
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b72be4 (Data Base System)
