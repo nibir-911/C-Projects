@@ -149,7 +149,7 @@ void viewstudent() {
     }
 }
 
-// Dummy placeholders (implement later)
+
 void searchbyname()
 { 
     if (count == 0) {
@@ -248,9 +248,70 @@ void searchbydepartment()
 
 void updatestudent() 
 { 
-    
+     if (count==0)
+        {
+           printf("No records found.\n");
+        }
+        printf("Enter Roll: ");
+        int search;
+        scanf("%d", &search);
+         int i;
+       for ( i = 0; i < count; i++)
+       {
+           if (student[i].roll==search)
+           {  
+    printf("Update Student Name: ");
+    scanf(" %[^\n]", student[i].name);
+
+    printf("Update Student Roll: ");
+    scanf("%d", &student[i].roll);
+
+    printf("Update Student Department: ");
+    scanf(" %[^\n]", student[i].department);
+
+    printf("Update Student CGPA: ");
+    scanf("%f", &student[i].cgpa);
 }
-void deletestudent() 
+
+}
+if (student[i].roll!=search)
 {
-   
+    printf("Student Not Found");
+}
+
+}
+
+
+void deletestudent() 
+{ 
+    if(count==0)
+    {
+        printf("No Records Found..!");
+    } 
+
+    int search;
+    printf("Enter Student Roll No. To Delete: ");
+    scanf("%d", &search);
+    int i;
+
+    for ( i = 0; i < count; i++)
+    {
+        if (student[i].roll==search)
+        {
+          for (int j = i; j < count-1; j++)
+          {
+            student[j]=student[j+1];
+            printf("Student Deleted Successfully..!");
+           count--;
+           
+          }
+           
+        }
+    }
+    return;
+    if (student[i].roll!=search)
+    {
+        printf("Student Not Found..!");
+    }
+    
 }
