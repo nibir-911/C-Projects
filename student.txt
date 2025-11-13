@@ -1,0 +1,8 @@
+Name :Raihan_Chowdhury_Nibir
+Roll :25316022
+Department :CIS
+CGPA :4.00
+Name :Shahriar_Sanjid_Snikdho
+Roll :25316021
+Department :CIS
+CGPA :3.80
