@@ -14,8 +14,8 @@ cis student[100];
 int count = 0;
 
 // Function declarations
-//void loaddata();
-//void savedata();
+void loaddata();
+void savedata();
 void addstudent();
 void viewstudent();
 void searchbyname();
@@ -24,9 +24,15 @@ void searchbydepartment();
 void updatestudent();
 void deletestudent();
 void adminpanel();
+void sortbyroll_asc();
+void sortbyroll_des();
+void sortbycgpa_asc();
+void sortbycgpa_desc();
+void sortbyname_asc();
+void sortbyname_desc();
 
 int main() {
-    //loaddata();
+    loaddata();
     char password[20];
     int choice, choice2;
 
@@ -54,7 +60,7 @@ int main() {
 
             case 2:
                 printf("Exiting...\n");
-                //savedata();
+                savedata();
                 return 0;
 
             default:
@@ -65,23 +71,50 @@ int main() {
     return 0;
 }
 
-/*void loaddata() {
-    FILE *fp = fopen("student.txt", "r");
-    if (fp == NULL) return;
-    count=0;
-    while (fscanf(fp, "%s %d %s %f", student[count].name, &student[count].roll,
-                  student[count].department, &student[count].cgpa) != EOF)
-        count++;
-    fclose(fp);
+
+void loaddata()
+{
+    FILE *fp = fopen("student.txt", "r"); 
+    if (fp != NULL)
+    {
+        count = 0;
+        while (fscanf(fp,"Name :%s\nRoll :%d\nDepartment :%s\nCGPA :%f\n", student[count].name,&student[count].roll,
+            student[count].department,&student[count].cgpa) == 4)
+    {
+            count++;
+            }
+        printf("\n");
+        fclose(fp);
+        printf("%d students loaded from File\n", count);   
+        }
+    else
+    {
+        printf("No Record in File\n");
+        
+    }
 }
 
-void savedata() {
+
+void savedata()
+{
     FILE *fp = fopen("student.txt", "w");
-    for (int i = 0; i < count; i++)
-        fprintf(fp, "\nName: %s\n Roll: %d\n Department: %s\n CGPA: %.2f\n", student[i].name, student[i].roll,
-                student[i].department, student[i].cgpa);
-    fclose(fp);
-}*/
+    if (fp != NULL)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            fprintf(fp,"Name :%s\nRoll :%d\nDepartment :%s\nCGPA :%.2f\n", student[i].name, student[i].roll,
+            student[i].department, student[i].cgpa);
+        }
+        printf("\n");
+        fclose(fp);
+        printf("%d students data saved to File\n", count);
+    }
+    else
+    {
+        printf("Unable to save data.\n");
+    }
+}
+
 void adminpanel()
 {
     int choice2;
@@ -96,7 +129,13 @@ void adminpanel()
     printf("5. Search Student by Department\n");
     printf("6. Update Student\n");
     printf("7. Delete Student\n");
-    printf("8. Exit Admin Panel\n");
+    printf("8. Sort by Roll(Ascending)\n");
+    printf("9. Sort by Roll(Descending)\n");
+    printf("10. Sort by Cgpa(Ascending)\n");
+    printf("11. Sort by Cgpa(Descending)\n");
+    printf("12. Sort by Name(Ascending)\n");
+     printf("13. Sort by Name(Descending)\n");
+    printf("14. Exit Admin Panel\n");
     printf("Enter choice: ");
     scanf("%d", &choice2);
 
@@ -108,7 +147,13 @@ void adminpanel()
                         case 5: searchbydepartment(); break;
                         case 6: updatestudent(); break;
                         case 7: deletestudent(); break;
-                        case 8: return;
+                        case 8: sortbyroll_asc(); break;
+                        case 9: sortbyroll_des(); break;
+                        case 10: sortbycgpa_asc(); break;
+                        case 11: sortbycgpa_desc(); break;
+                        case 12: sortbyname_asc(); break;
+                        case 13: sortbyname_desc(); break;
+                        case 14: return;
                         default: printf("Wrong selection.... Try Again\n"); break;
                     }
 }
@@ -129,7 +174,7 @@ void addstudent() {
     scanf("%f", &student[count].cgpa);
 
     count++;
-   // savedata();
+    savedata();
     printf("Student Added Successfully\n");
 }
 
@@ -237,8 +282,9 @@ void searchbydepartment()
             printf("Department: %s\n", student[i].department);
             printf("CGPA: %.2f\n", student[i].cgpa);
             found = 1;
-            break;
+            
     }
+    break;
 }
     if(!found) 
     {
@@ -314,4 +360,193 @@ void deletestudent()
         printf("Student Not Found..!");
     }
     
+}
+
+void sortbyroll_asc()
+{
+    if(count==0)
+    {
+        printf("No Records Found..!");
+    }
+     for (int i = 0; i < count-1; i++)
+     {
+        for (int j = 0; j < count-i-1; j++)
+        {
+            if (student[j].roll>student[j+1].roll)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+     }
+     printf("\nSort by Roll (Ascending)\n");
+     for (int j = 0; j < count; j++)
+        {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+        }
+     
+}
+
+void sortbyroll_des()
+{
+    if(count==0)
+    {
+        printf("No Records Found..!");
+    }
+     for (int i = 0; i < count-1; i++)
+     {
+        for (int j = 0; j < count-i-1; j++)
+        {
+            if (student[j].roll<student[j+1].roll)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+     }
+     printf("\nSort by Roll (Descending)\n");
+     for (int j = 0; j < count; j++)
+        {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+        }
+     
+}
+
+void sortbycgpa_asc()
+{
+    if (count==0)
+    {
+       printf("No Record Found...!");
+    }
+    for (int i = 0; i < count-1; i++)
+    {
+        for (int j = 0; j < count-i-1; j++)
+        {
+            if (student[j].cgpa> student[j+1].cgpa)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+    }
+    printf("\nSort By CGPA (Ascending)\n");
+    for (int j = 0; j < count; j++)
+    {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+    }
+    
+}
+
+void sortbycgpa_desc()
+{
+    if (count==0)
+    {
+       printf("No Record Found...!");
+    }
+    for (int i = 0; i < count-1; i++)
+    {
+        for (int j = 0; j < count-i-1; j++)
+        {
+            if (student[j].cgpa < student[j+1].cgpa)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+    }
+    printf("\nSort By CGPA (Descending)\n");
+    for (int j = 0; j < count; j++)
+    {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+    }
+}
+
+
+void sortbyname_asc()
+{
+    if (count==0)
+    {
+       printf("No Record Found...!");
+    }
+    for (int i = 0; i < count-1; i++)
+    {
+        for (int j = 0; j < count-i-1; j++)
+        {
+          if (strcmp(student[j].name, student[j + 1].name) > 0)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+    }
+    printf("\nSort By Name (Ascending)\n");
+    for (int j = 0; j < count; j++)
+    {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+    }
+}
+void sortbyname_desc()
+{
+    if (count==0)
+    {
+       printf("No Record Found...!");
+    }
+    for (int i = 0; i < count-1; i++)
+    {
+        for (int j = 0; j < count-i-1; j++)
+        {
+          if (strcmp(student[j].name, student[j + 1].name) < 0)
+            {
+                student[count+1]=student[j];
+                student[j]=student[j+1];
+                student[j+1]=student[count+1];
+            }
+            
+        }
+        
+    }
+    printf("\nSort By Name (Descending)\n");
+    for (int j = 0; j < count; j++)
+    {
+            printf("Name: %s\n", student[j].name);
+            printf("Roll: %d\n", student[j].roll);
+            printf("Department: %s\n", student[j].department);
+            printf("CGPA: %.2f\n", student[j].cgpa);
+            printf("\n");
+    }
 }
