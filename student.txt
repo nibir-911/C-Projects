@@ -5,4 +5,5 @@ CGPA :4.00
 Name :Shahriar_Sanjid_Snikdho
 Roll :25316021
 Department :CIS
-CGPA :3.80
+CGPA :4.00
+
